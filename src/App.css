@@ -1,0 +1,22 @@
+html {
+  /*
+  avoid jitter due to scrollbar being present on one page and not on the other.
+  https://css-tricks.com/elegant-fix-jumping-scrollbar-issue/
+  */
+  margin-left: calc(100vw - 100%);
+}
+
+.page p {
+  text-align: justify;
+}
+
+.gala-busdienst,
+.gala-adres,
+.gala-menu {
+  text-align: center;
+  background-color: #fff9c2;
+}
+
+.gala-prijs {
+  text-align: center;
+}
