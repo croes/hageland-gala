@@ -24,7 +24,7 @@ export class WelcomePage extends React.Component<{}, {}> {
           Zwijn! Anno 2018 valt mij de eer ten beurt u uit te nodigen voor het 144ste Galabal der Lelijkheid.
         </p>
 
-        <img src={require('../assets/images/15.jpg')} style={{width: '88%', marginLeft: '5%', marginRight: '5%'}}/>
+        <img src={require('../assets/images/15.jpg')} style={{width: '100%'}}/>
 
         <p>
           Via deze site kan u informatie over het diner, het avondfeest en de busdiensten (avondfeest, diner)
