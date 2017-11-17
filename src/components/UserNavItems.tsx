@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
 import * as NavItem from 'react-bootstrap/lib/NavItem';
-import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
+import { LinkContainer } from 'react-router-bootstrap';
 
 interface UserDisplayState {
   user: firebase.User | null;
