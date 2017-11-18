@@ -4,6 +4,7 @@ import * as Table from 'react-bootstrap/lib/Table';
 
 interface DinerListProps {
   reservations: DinerReservation[];
+  emptyListMessage: string;
 }
 
 export class DinerList extends React.Component<DinerListProps, {}> {
@@ -13,7 +14,7 @@ export class DinerList extends React.Component<DinerListProps, {}> {
     if (reservations.length === 0) {
       return (
         <tr>
-          <td colSpan={4} style={{textAlign: 'center'}}><b>Geen reservaties gevonden.</b></td>
+          <td colSpan={4} style={{textAlign: 'center'}}><b>{this.props.emptyListMessage}</b></td>
         </tr>
       );
     }

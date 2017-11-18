@@ -10,7 +10,7 @@ import { DinerPage } from './pages/DinerPage';
 import { AvondFeestPage } from './pages/AvondFeestPage';
 import { LocatiePage } from './pages/LocatiePage';
 import { BusPage } from './pages/BusPage';
-import { ReservationsPage } from './pages/ReservationsPage';
+import { ReservationsPage } from './pages/reservations/ReservationsPage';
 
 class App extends React.Component<{}, {}> {
   render() {
