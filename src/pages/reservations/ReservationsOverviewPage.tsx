@@ -16,6 +16,8 @@ interface ReservationOverviewPageState {
 export class ReservationsOverviewPage
   extends React.Component <ReservationsOverviewPageProps, ReservationOverviewPageState> {
 
+  _dinerReservationsRef: firebase.database.Reference;
+
   constructor(props: ReservationsOverviewPageProps) {
     super(props);
     this.state = {
@@ -27,8 +29,8 @@ export class ReservationsOverviewPage
   componentDidMount() {
     const {user} = this.props;
     this.setState({...this.state, isLoading: true});
-    firebase.database()
-      .ref('reservations/diner')
+    this._dinerReservationsRef = firebase.database().ref('reservations/diner');
+    this._dinerReservationsRef
       .orderByChild('createdBy')
       .equalTo(user.uid)
       .on('child_added', (snapshot) => {
@@ -40,6 +42,10 @@ export class ReservationsOverviewPage
           });
         }
       });
+  }
+
+  componentWillUnmount() {
+    this._dinerReservationsRef.off();
   }
 
   render() {
