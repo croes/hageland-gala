@@ -33,17 +33,19 @@ export class ReservationsOverviewPage
     return Promise.resolve([]).then((dinerReservations) => {
       this.setState({...this.state, isLoading: false, dinerReservations});
     });
-  };
+  }
 
   render() {
     const {dinerReservations, isLoading} = this.state;
+    const {user} = this.props;
     return (
       <div>
+        <h1>{(user && user.displayName) ? `Reservaties voor ${user.displayName}` : 'Mijn reservaties'}</h1>
         <DinerList
           reservations={dinerReservations}
           emptyListMessage={isLoading ? 'Aan het laden...' : 'Geen reservaties gevonden.'}
         />
-        <Link className="btn btn-primary" to={"/reservaties/nieuw"}>Voeg reservatie toe</Link>
+        <Link className="btn btn-primary" to={'/reservaties/nieuw'}>Voeg reservatie toe</Link>
       </div>
     );
   }

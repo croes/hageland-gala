@@ -40,12 +40,12 @@ class ReservationsPageComponent extends React.Component<RouteComponentProps<{}>,
     if (!user) {
       return (
         <Redirect to="/login"/>
-      )
+      );
     }
     return (
       <Switch>
         <Route path={`${match.url}/nieuw`} render={() => <AddDinerReservationPage user={user} />}/>
-        <Route path={`${match.url}`} component={ReservationsOverviewPage}/>
+        <Route path={`${match.url}`} render={() => <ReservationsOverviewPage user={user} />}/>
       </Switch>
     );
   }

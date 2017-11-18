@@ -18,7 +18,7 @@ export class AddDinerReservationPage
     super(props);
     this.state = {
       finishedCreating: false
-    }
+    };
   }
 
   render() {
@@ -43,6 +43,6 @@ export class AddDinerReservationPage
           return Promise.resolve();
         }}
       />
-    )
+    );
   }
 }

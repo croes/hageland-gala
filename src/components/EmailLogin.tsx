@@ -33,7 +33,7 @@ class EmailLoginComponent extends React.Component<RouteComponentProps<{}>, Email
     const email = this._emailInput.value;
     const password = this._passwordInput.value;
     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-      this.props.history.push('/welkom');
+      this.props.history.push('/reservaties');
     }).catch(error => {
       this.setState({...this.state, isLoggingIn: false, errorMessage: error.message});
     });
