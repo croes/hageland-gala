@@ -25,14 +25,21 @@ export class ReservationsOverviewPage
   }
 
   componentDidMount() {
-    this.fetchReservations();
-  }
-
-  fetchReservations = () => {
+    const {user} = this.props;
     this.setState({...this.state, isLoading: true});
-    return Promise.resolve([]).then((dinerReservations) => {
-      this.setState({...this.state, isLoading: false, dinerReservations});
-    });
+    firebase.database()
+      .ref('reservations/diner')
+      .orderByChild('createdBy')
+      .equalTo(user.uid)
+      .on('child_added', (snapshot) => {
+        if (snapshot) {
+          this.setState({
+            ...this.state,
+            isLoading: false,
+            dinerReservations: [...this.state.dinerReservations, snapshot.val()]
+          });
+        }
+      });
   }
 
   render() {

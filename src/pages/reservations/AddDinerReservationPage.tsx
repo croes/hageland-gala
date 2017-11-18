@@ -40,7 +40,16 @@ export class AddDinerReservationPage
         user={user}
         onSubmit={(dinerReservation) => {
           this.setState({...this.state, finishedCreating: true});
-          return Promise.resolve();
+          return new Promise((resolve, reject) => {
+            firebase.database()
+              .ref(`reservations/diner`)
+              .push(dinerReservation, (error) => {
+                if (error) {
+                  reject(error);
+                }
+                resolve();
+              });
+          });
         }}
       />
     );
