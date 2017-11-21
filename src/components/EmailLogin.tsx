@@ -6,7 +6,7 @@ import * as Form from 'react-bootstrap/lib/Form';
 import * as FormGroup from 'react-bootstrap/lib/FormGroup';
 import * as Button from 'react-bootstrap/lib/Button';
 import * as firebase from 'firebase';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import { withRouter } from 'react-router';
 
@@ -58,6 +58,7 @@ class EmailLoginComponent extends React.Component<RouteComponentProps<{}>, Email
     const {errorMessage} = this.state;
     return (
       <Form horizontal={true} onSubmit={this.handleSubmit}>
+        Nog geen account? <Link to="/registreer">Registreer je hier</Link>
         <FormGroup controlId="loginEmail">
           <Col componentClass={ControlLabel} sm={2}>
             Email
