@@ -15,6 +15,8 @@ interface LoginPageState {
 
 export class LoginPage extends React.Component<{}, LoginPageState> {
 
+  _unsubscribeAuthStateChanged: firebase.Unsubscribe | null;
+
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -26,10 +28,27 @@ export class LoginPage extends React.Component<{}, LoginPageState> {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(
-      (user) => { this.setState({...this.state, isLoading: false, user}); },
-      (error) => { this.setState({...this.state, loginError: error}); }
-      );
+    this.subscribeToAuthStateChanged();
+  }
+
+  subscribeToAuthStateChanged = () => {
+    this._unsubscribeAuthStateChanged = firebase.auth().onAuthStateChanged(
+        (user) => {
+          this.setState({...this.state, isLoading: false, user});
+        },
+        (error) => {
+          this.setState({...this.state, loginError: error});
+        });
+  }
+
+  unsubscribeFromAuthStateChanged = () => {
+    if (this._unsubscribeAuthStateChanged) {
+      this._unsubscribeAuthStateChanged();
+    }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuthStateChanged();
   }
 
   handleEmailLoginButtonClick = () => {
@@ -38,6 +57,7 @@ export class LoginPage extends React.Component<{}, LoginPageState> {
 
   handleLogoutLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+    this.unsubscribeFromAuthStateChanged();
     this.setState({...this.state, isLoading: true});
   }
 
