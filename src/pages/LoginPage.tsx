@@ -10,6 +10,7 @@ interface LoginPageState {
   showLoginForm: boolean;
   isLoading: boolean;
   user: firebase.User | null;
+  loginError: firebase.auth.Error | null;
 }
 
 export class LoginPage extends React.Component<{}, LoginPageState> {
@@ -19,14 +20,15 @@ export class LoginPage extends React.Component<{}, LoginPageState> {
     this.state = {
       showLoginForm: false,
       isLoading: true,
-      user: null
+      user: null,
+      loginError: null
     };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(
       (user) => { this.setState({...this.state, isLoading: false, user}); },
-      (error) => { console.error(error); }
+      (error) => { this.setState({...this.state, loginError: error}); }
       );
   }
 
@@ -40,9 +42,18 @@ export class LoginPage extends React.Component<{}, LoginPageState> {
   }
 
   render() {
-    const {isLoading, user} = this.state;
+    const {isLoading, user, loginError} = this.state;
     if (isLoading) {
       return <h1>Loading...</h1>;
+    }
+    if (loginError) {
+      return (
+          <div>
+            <h1>Oops, er is een fout opgetreden!</h1>
+            Error code: {loginError.code}
+            Error message: {loginError.message}
+          </div>
+      );
     }
     if (user) {
       return (
