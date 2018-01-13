@@ -4,6 +4,7 @@ import { DinerReservation } from '../../model';
 import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import { AddDinerReservationPage } from './AddDinerReservationPage';
 import { ReservationsOverviewPage } from './ReservationsOverviewPage';
+import { AddBusReservationPage } from './AddBusReservationPage';
 
 interface ReservationsPageState {
   isLoading: boolean;
@@ -44,7 +45,8 @@ class ReservationsPageComponent extends React.Component<RouteComponentProps<{}>,
     }
     return (
       <Switch>
-        <Route path={`${match.url}/nieuw`} render={() => <AddDinerReservationPage user={user} />}/>
+        <Route path={`${match.url}/diner/nieuw`} render={() => <AddDinerReservationPage user={user} />}/>
+        <Route path={`${match.url}/bus/nieuw`} render={() => <AddBusReservationPage user={user} />}/>
         <Route path={`${match.url}`} render={() => <ReservationsOverviewPage user={user} />}/>
       </Switch>
     );

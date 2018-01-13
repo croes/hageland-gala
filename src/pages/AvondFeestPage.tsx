@@ -8,17 +8,21 @@ export class AvondFeestPage extends React.Component<{}, {}> {
       <div className="page">
         <h1>Avondfeest</h1>
         <p>
-          Vanaf 22u30 kan u mee uit de bol gaan op ons spetterend dansfeest. De ambiance zal worden verzorgd
-          door DJ Wild Turkey. Verder kan u ook genieten van heerlijke cava en cocktails aan onze cava &amp;
-          cocktailbar.
-          Iedereen is van harte welkom en de inkom is volledig GRATIS.
+          Vanaf 22u00 kan u mee uit de bol gaan op ons spetterend avondfeest. De ambiance zal worden verzorgd
+          door DJ Wild Turkey. Iedereen is van harte welkom.
           Het enige wat u hoeft te doen is uw avondkledij aantrekken en komen genieten van een heerlijke avond!
         </p>
 
+        <h2>Prijs</h2>
+        <p>
+          Het avondfeest is inbegrepen in de prijs van het diner.<br/>
+          Als u niet komt dineren, dan is het avondfeest <b>€20,- per persoon</b>.<br/>
+          Deze prijs is <b>inclusief drank</b> (exclusief schuimwijnen) tot <b>04u00</b>.
+        </p>
+
         <h2>Busdienst</h2>
-        Indien u wenst, kan u gebruik maken van onze busdienst en dit voor maar slechts €5.
-        Voor het avondfeest is er 1 heenrit en 1 terugrit voorzien.
-        Meer informatie vind je op de <Link to="/bus">Bus pagina</Link>.
+          Indien u wenst, kan u gebruik maken van onze gratis busdienst.
+          Meer informatie vind je op de <Link to="/bus">Bus pagina</Link>.
       </div>
     );
   }

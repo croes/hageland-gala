@@ -21,7 +21,7 @@ export class WelcomePage extends React.Component<{}, {}> {
         <p>
           Broeder Hagelander: werkleven ex, decadentie in. Grijp naar uw lint, zoek naar die bierpet, sleur tevoorschijn
           die zwarte kas en zààg bij die vrouw. De tijd van beschaving &amp; moderatie is voorbij, nu is het uur van het
-          Zwijn! Anno 2018 valt mij de eer ten beurt u uit te nodigen voor het 144ste Galabal der Lelijkheid.
+          Zwijn! Anno 2018 valt ons de eer ten beurt u uit te nodigen voor het 144ste Galabal der Lelijkheid.
         </p>
 
         <img src={require('../assets/images/15.jpg')} style={{width: '100%'}}/>

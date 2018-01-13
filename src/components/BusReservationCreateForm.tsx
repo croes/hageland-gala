@@ -7,21 +7,21 @@ import * as FormControl from 'react-bootstrap/lib/FormControl';
 import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 import * as ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
-import { BusReservation, DinerReservation, MenuChoice, ReservationStatus, translateMenuChoice } from '../model';
+import { BusReservation, ReservationStatus } from '../model';
 import * as Button from 'react-bootstrap/lib/Button';
 import * as HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import * as firebase from 'firebase';
 
-interface DinerReservationCreateFormProps {
+interface BusReservationCreateFormProps {
   user: firebase.User;
-  onSubmit: (dinerReservation: DinerReservation, busReservation: BusReservation | null) => Promise<void>;
+  onSubmit: (busReservation: BusReservation) => Promise<void>;
 }
 
-interface DinerReservationCreateFormState {
+interface BusReservationCreateFormState {
   reserveeName: string;
-  menuChoice: MenuChoice;
-  takesDinerBus: boolean;
-  takesNightBus: boolean;
+  dinerBus: boolean;
+  partyBus: boolean;
+  nightBus: boolean;
   submitting: boolean;
   submitError: Error | null;
 }
@@ -29,16 +29,16 @@ interface DinerReservationCreateFormState {
 const LEFT_COLUMN_SIZE = 4;
 const RIGHT_COLUMN_SIZE = 12 - LEFT_COLUMN_SIZE;
 
-export class DinerReservationCreateForm
-  extends React.Component<DinerReservationCreateFormProps, DinerReservationCreateFormState> {
+export class BusReservationCreateForm
+  extends React.Component<BusReservationCreateFormProps, BusReservationCreateFormState> {
 
-  constructor(props: DinerReservationCreateFormProps) {
+  constructor(props: BusReservationCreateFormProps) {
     super(props);
     this.state = {
       reserveeName: '',
-      menuChoice: MenuChoice.MEAT,
-      takesDinerBus: false,
-      takesNightBus: false,
+      dinerBus: false,
+      partyBus: true,
+      nightBus: true,
       submitting: false,
       submitError: null
     };
@@ -46,35 +46,25 @@ export class DinerReservationCreateForm
 
   handleSubmit = (event: React.FormEvent<Form>) => {
     event.preventDefault();
+    const {reserveeName, dinerBus, partyBus, nightBus} = this.state;
     this.setState({...this.state, submitting: true});
-    const {reserveeName, menuChoice, takesDinerBus, takesNightBus} = this.state;
     if (!reserveeName) {
       const error = new Error('Geen naam ingegeven');
       this.setState({...this.state, submitting: false, submitError: error});
       return;
     }
     const date: number = Date.now();
-    let busReservation: BusReservation | null = null;
-    if (takesNightBus || takesDinerBus) {
-      busReservation = {
-        reserveeName: reserveeName,
-        dinerBus: takesDinerBus,
-        nightBus: takesNightBus,
-        partyBus: false,
-        createdBy: this.props.user.uid,
-        createdOn: date,
-        status: ReservationStatus.SUBMITTED
-      };
-    }
-    const dinerReservation: DinerReservation = {
+    const busReservation: BusReservation = {
       reserveeName: reserveeName,
-      menuChoice: menuChoice,
+      dinerBus: dinerBus,
+      nightBus: nightBus,
+      partyBus: partyBus,
       createdBy: this.props.user.uid,
       createdOn: date,
       status: ReservationStatus.SUBMITTED
     };
-    this.props.onSubmit(dinerReservation, busReservation).catch(error => {
-      this.setState({...this.state, submitting: false, submitError: error});
+    this.props.onSubmit(busReservation).catch(error => {
+      this.setState({...this.state, submitError: error});
     });
   }
 
@@ -117,73 +107,77 @@ export class DinerReservationCreateForm
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="dinerChoiceField">
-            <Col componentClass={ControlLabel} sm={LEFT_COLUMN_SIZE}>
-              Menu
-            </Col>
-            <Col sm={RIGHT_COLUMN_SIZE}>
-              <ButtonToolbar>
-                <ToggleButtonGroup
-                  type="radio"
-                  name="options"
-                  value={this.state.menuChoice}
-                  onChange={(newValue) => {
-                    // tslint:disable-next-line:no-any
-                    this.setState({...this.state, menuChoice: (newValue as any as MenuChoice)});
-                  }}
-                >
-                  <ToggleButton value={MenuChoice.MEAT}>
-                    {translateMenuChoice(MenuChoice.MEAT)}
-                  </ToggleButton>
-                  <ToggleButton value={MenuChoice.FISH}>
-                    {translateMenuChoice(MenuChoice.FISH)}
-                  </ToggleButton>
-                </ToggleButtonGroup>
-              </ButtonToolbar>
-            </Col>
-          </FormGroup>
-
           <FormGroup controlId="dinerBusField">
             <Col componentClass={ControlLabel} sm={LEFT_COLUMN_SIZE}>
               Bus naar het diner?
-              <HelpBlock>vertrekt om 17u aan het Gerechtsgebouw te Leuven</HelpBlock>
+              <HelpBlock>vertrek: 17u@Leuven</HelpBlock>
+              <HelpBlock>aankomst: 18u@Galabal</HelpBlock>
             </Col>
             <Col sm={RIGHT_COLUMN_SIZE}>
               <ButtonToolbar>
                 <ToggleButtonGroup
                   type="radio"
                   name="options"
-                  value={this.state.takesDinerBus ? 'ja' : 'nee'}
+                  value={this.state.dinerBus ? 'ja' : 'nee'}
                   onChange={(newValue) =>
                     // tslint:disable-next-line:no-any
-                    this.setState({...this.state, takesDinerBus: (newValue as any as string) === 'ja'})
+                    this.setState({...this.state, dinerBus: (newValue as any as string) === 'ja'})
                   }
                 >
                   <ToggleButton value={'ja'}>
-                   Ja
+                    Ja
                   </ToggleButton>
                   <ToggleButton value={'nee'}>
-                   Nee
+                    Nee
                   </ToggleButton>
                 </ToggleButtonGroup>
               </ButtonToolbar>
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="dinerBusField">
+          <FormGroup controlId="partyBusField">
             <Col componentClass={ControlLabel} sm={LEFT_COLUMN_SIZE}>
-              Bus terug naar Leuven?
-              <HelpBlock>vertrekt om 3u45 op het galabal naar het Gerechtsgebouw te Leuven</HelpBlock>
+              Bus naar het avondfeest?
+              <HelpBlock>vertrek: 21u@Leuven</HelpBlock>
+              <HelpBlock>aankomst: 22u@Galabal</HelpBlock>
             </Col>
             <Col sm={RIGHT_COLUMN_SIZE}>
               <ButtonToolbar>
                 <ToggleButtonGroup
                   type="radio"
                   name="options"
-                  value={this.state.takesNightBus ? 'ja' : 'nee'}
+                  value={this.state.partyBus ? 'ja' : 'nee'}
                   onChange={(newValue) =>
                     // tslint:disable-next-line:no-any
-                    this.setState({...this.state, takesNightBus: (newValue as any as string) === 'ja'})
+                    this.setState({...this.state, partyBus: (newValue as any as string) === 'ja'})
+                  }
+                >
+                  <ToggleButton value={'ja'}>
+                    Ja
+                  </ToggleButton>
+                  <ToggleButton value={'nee'}>
+                    Nee
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </ButtonToolbar>
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="partyBusField">
+            <Col componentClass={ControlLabel} sm={LEFT_COLUMN_SIZE}>
+              Bus terug naar Leuven?
+              <HelpBlock>vertrek: 3u45@Galabal</HelpBlock>
+              <HelpBlock>aankomst: 5u00@Leuven</HelpBlock>
+            </Col>
+            <Col sm={RIGHT_COLUMN_SIZE}>
+              <ButtonToolbar>
+                <ToggleButtonGroup
+                  type="radio"
+                  name="options"
+                  value={this.state.nightBus ? 'ja' : 'nee'}
+                  onChange={(newValue) =>
+                    // tslint:disable-next-line:no-any
+                    this.setState({...this.state, nightBus: (newValue as any as string) === 'ja'})
                   }
                 >
                   <ToggleButton value={'ja'}>

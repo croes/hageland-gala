@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+const GOOGLE_API_KEY = 'AIzaSyCBmIen-pSvDEf2Zocje42SVZ75OK5Xj1c';
+
 export class LocatiePage extends React.Component<{}, {}> {
 
   render() {
@@ -7,9 +9,9 @@ export class LocatiePage extends React.Component<{}, {}> {
       <div className="page">
         <h2>Adres</h2>
         <div className="gala-adres">
-          <a href="http://www.hetmonnikenhofvanvlierbeek.be/">Het Monnikenhof van Vlierbeek</a><br/>
-          Kasteellaan 5<br/>
-          3450 Geetbets
+          <a href="http://http://www.feestzaallindenhof.be//">Feestzaal Lindenhof</a><br/>
+          Booischotsestraat 1<br/>
+          3128 Tremelo
         </div>
 
         <h2>Kaart</h2>
@@ -17,10 +19,9 @@ export class LocatiePage extends React.Component<{}, {}> {
           <iframe
             frameBorder={0}
             style={{border: 0, width: '100%', height: '450px'}}
-            src={'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2516.432694714032!' +
-                 '2d5.110916315895863!3d50.897209362953355!2m3!1f0!2f0!3f0!3m2!1i1024!2i76' +
-                 '8!4f13.1!3m3!1m2!1s0x47c115f978b1bd65%3A0xd5983105463949cc!2sHet+Monnike' +
-                 'nhof+van+Vlierbeek!5e0!3m2!1sen!2sbe!4v1510492088120'}
+            src={
+              'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJXbEWIO5bwUcRCrPgdiCAYnE&key=' + GOOGLE_API_KEY
+            }
             allowFullScreen={true}
           />
         </div>
