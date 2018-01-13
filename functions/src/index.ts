@@ -1,8 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from "nodemailer";
-import { DinerReservation, translateMenuChoice } from 'shared/model';
-import { BANK_ACCOUNT, DINER_PRICE, DINER_STUDENT_PRICE, END_OF_RESERVATION_DATE_STRING } from 'shared/constants';
+import { DinerReservation, translateMenuChoice } from './model';
+import { BANK_ACCOUNT, DINER_PRICE, DINER_STUDENT_PRICE, END_OF_RESERVATION_DATE_STRING } from './constants';
 admin.initializeApp(functions.config().firebase);
 
 const gmailEmail = functions.config().gmail.email;

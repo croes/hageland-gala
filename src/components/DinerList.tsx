@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DinerReservation, ReservationStatus, translateMenuChoice } from 'shared/model';
+import { DinerReservation, ReservationStatus, translateMenuChoice } from '../model';
 import * as Table from 'react-bootstrap/lib/Table';
 
 interface DinerListProps {

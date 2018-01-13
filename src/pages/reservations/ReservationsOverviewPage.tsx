@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
-import { BusReservation, DinerReservation } from 'shared/model';
+import { BusReservation, DinerReservation } from '../../model';
 import { DinerList } from '../../components/DinerList';
 import { Link } from 'react-router-dom';
 import { BusReservationList } from '../../components/BusReservationList';
@@ -42,9 +42,9 @@ export class ReservationsOverviewPage
     this._dinerReservationsRef.on('value', (diners) => {
       this.setState({...this.state, isLoadingDiner: false, dinerReservations: []});
       if (diners) {
-        diners.forEach((dinerReservations) => {
+        diners.forEach((dinerReservation) => {
           this.setState({
-            dinerReservations: [...this.state.dinerReservations, dinerReservations.val()]
+            dinerReservations: [...this.state.dinerReservations, dinerReservation.val()]
           });
           return false;
         });
@@ -61,7 +61,7 @@ export class ReservationsOverviewPage
       if (busReservations) {
         busReservations.forEach((busReservation) => {
           this.setState({
-            dinerReservations: [...this.state.busReservations, busReservation.val()]
+            busReservations: [...this.state.busReservations, busReservation.val()]
           });
           return false;
         });

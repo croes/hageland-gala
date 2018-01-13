@@ -38,9 +38,9 @@ export class AddDinerReservationPage
     return (
       <DinerReservationCreateForm
         user={user}
-        onSubmit={(dinerReservation) => {
+        onSubmit={(dinerReservation, busReservation) => {
           this.setState({...this.state, finishedCreating: true});
-          return new Promise((resolve, reject) => {
+          const createDinerPromise = new Promise<void>((resolve, reject) => {
             firebase.database()
               .ref(`reservations/diner`)
               .push(dinerReservation, (error) => {
@@ -50,6 +50,21 @@ export class AddDinerReservationPage
                 resolve();
               });
           });
+          let creationPromises: Promise<void>[] = [createDinerPromise];
+          if (busReservation) {
+            const createBusReservationPromise = new Promise<void>((resolve, reject) => {
+              firebase.database()
+                .ref('reservations/bus')
+                .push(busReservation, (error) => {
+                  if (error) {
+                    reject(error);
+                  }
+                  resolve();
+                });
+            });
+            creationPromises.push(createBusReservationPromise);
+          }
+          return Promise.all(creationPromises).then(() => undefined);
         }}
       />
     );
