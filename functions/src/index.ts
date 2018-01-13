@@ -20,12 +20,14 @@ export const sendEmailConfirmationForDiner = functions.database.ref('/reservatio
   const snapshot = event.data;
   const diner = snapshot.val() as DinerReservation;
 
+  console.log("New diner reservation (key: [" + snapshot.key + "]) found. Sending confirmation email.");
+
   const userUid = diner.createdBy;
   const userPromise = admin.auth().getUser(userUid);
 
   return userPromise.then(user => {
     const mailOptions = {
-      from: '"Hageland Galabalcomité" <noreply@hagelandgala.be>',
+      from: '"Hageland Galabalcomité" <hagelandgalabal@gmail.com>',
       to: user.email,
       subject: "Hageland Galabal - reservatie diner",
       text: `Hallo ${user.displayName},\n` +
