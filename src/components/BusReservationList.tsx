@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BusReservation } from '../model';
+import { BusReservation } from 'shared/model';
 import * as Table from 'react-bootstrap/lib/Table';
 
 interface BusReservationListProps {

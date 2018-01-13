@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
-import { DinerReservation } from '../../model';
+import { DinerReservation } from 'shared/model';
 import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import { AddDinerReservationPage } from './AddDinerReservationPage';
 import { ReservationsOverviewPage } from './ReservationsOverviewPage';

@@ -1,0 +1,16 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "description": "Shared between functions and non-functions",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Glenn Croes",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "2.5.3"
+  }
+}

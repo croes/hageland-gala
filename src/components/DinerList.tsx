@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DinerReservation, ReservationStatus, translateMenuChoice } from '../model';
+import { DinerReservation, ReservationStatus, translateMenuChoice } from 'shared/model';
 import * as Table from 'react-bootstrap/lib/Table';
 
 interface DinerListProps {
@@ -27,7 +27,7 @@ export class DinerList extends React.Component<DinerListProps, {}> {
           <td>{reservation.reserveeName}</td>
           <td>{translateMenuChoice(reservation.menuChoice)}</td>
           <td>{reservationDateString}</td>
-          <td>{paid ? 'Ja' : 'Nee'}</td>
+          <td>{paid ? 'Jas' : 'Nee'}</td>
         </tr>
       );
     });

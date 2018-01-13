@@ -12,7 +12,9 @@ interface FacebookLoginButtonState {
   passwordPrompResult: string;
 }
 
-class FacebookLoginButtonComponent extends React.Component<RouteComponentProps<{}>, FacebookLoginButtonState> {
+type FacebookLoginButtonProps = RouteComponentProps<{}>;
+
+class FacebookLoginButtonComponent extends React.Component<FacebookLoginButtonProps, FacebookLoginButtonState> {
 
   _onPasswordEntered: ((password: string) => void) | null = null;
   _onHide: (() => void) | null = null;
@@ -92,4 +94,4 @@ class FacebookLoginButtonComponent extends React.Component<RouteComponentProps<{
   }
 }
 
-export const FacebookLoginButton = withRouter<{}>(FacebookLoginButtonComponent);
+export const FacebookLoginButton = withRouter<FacebookLoginButtonProps>(FacebookLoginButtonComponent);

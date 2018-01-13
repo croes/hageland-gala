@@ -7,7 +7,7 @@ import * as FormControl from 'react-bootstrap/lib/FormControl';
 import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 import * as ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
-import { BusReservation, ReservationStatus } from '../model';
+import { BusReservation, ReservationStatus } from 'shared/model';
 import * as Button from 'react-bootstrap/lib/Button';
 import * as HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import * as firebase from 'firebase';

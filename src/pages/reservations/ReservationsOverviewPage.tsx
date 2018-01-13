@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
-import { BusReservation, DinerReservation } from '../../model';
+import { BusReservation, DinerReservation } from 'shared/model';
 import { DinerList } from '../../components/DinerList';
 import { Link } from 'react-router-dom';
 import { BusReservationList } from '../../components/BusReservationList';

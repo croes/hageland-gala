@@ -15,7 +15,9 @@ interface EmailLoginState {
   errorMessage: string | null;
 }
 
-class EmailLoginComponent extends React.Component<RouteComponentProps<{}>, EmailLoginState> {
+type EmailLoginProps = RouteComponentProps<{}>;
+
+class EmailLoginComponent extends React.Component<EmailLoginProps, EmailLoginState> {
 
   _emailInput: HTMLInputElement;
   _passwordInput: HTMLInputElement;
@@ -91,4 +93,4 @@ class EmailLoginComponent extends React.Component<RouteComponentProps<{}>, Email
   }
 }
 
-export const EmailLogin = withRouter<{}>(EmailLoginComponent);
+export const EmailLogin = withRouter<EmailLoginProps>(EmailLoginComponent);

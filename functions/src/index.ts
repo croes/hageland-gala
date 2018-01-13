@@ -1,8 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from "nodemailer";
-import { DinerReservation, translateMenuChoice } from '../../src/model';
-import { BANK_ACCOUNT, DINER_PRICE, DINER_STUDENT_PRICE, END_OF_RESERVATION_DATE_STRING } from '../../src/constants';
+import { DinerReservation, translateMenuChoice } from 'shared/model';
+import { BANK_ACCOUNT, DINER_PRICE, DINER_STUDENT_PRICE, END_OF_RESERVATION_DATE_STRING } from 'shared/constants';
 admin.initializeApp(functions.config().firebase);
 
 const gmailEmail = functions.config().gmail.email;
@@ -16,7 +16,7 @@ const mailTransport = nodemailer.createTransport({
 });
 
 // Sends an email confirmation when a user changes his mailing list subscription.
-exports.sendEmailConfirmationForDiner = functions.database.ref('/reservations/diner').onCreate(event => {
+export const sendEmailConfirmationForDiner = functions.database.ref('/reservations/diner').onCreate(event => {
   const snapshot = event.data;
   const diner = snapshot.val() as DinerReservation;
 
