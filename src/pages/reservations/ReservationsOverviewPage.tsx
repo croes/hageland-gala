@@ -4,6 +4,7 @@ import { BusReservation, DinerReservation } from '../../model';
 import { DinerList } from '../../components/DinerList';
 import { Link } from 'react-router-dom';
 import { BusReservationList } from '../../components/BusReservationList';
+import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 interface ReservationsOverviewPageProps {
   user: firebase.User;
@@ -42,11 +43,18 @@ export class ReservationsOverviewPage
     this._dinerReservationsRef.on('value', (diners) => {
       this.setState({...this.state, isLoadingDiner: false, dinerReservations: []});
       if (diners) {
+        const newReservations: DinerReservation[] = [];
         diners.forEach((dinerReservation) => {
-          this.setState({
-            dinerReservations: [...this.state.dinerReservations, dinerReservation.val()]
-          });
+          const dinerReservationWithKey = {
+            ...dinerReservation.val(),
+            key: dinerReservation.key,
+            path: dinerReservation.ref.path
+          };
+          newReservations.push(dinerReservationWithKey);
           return false;
+        });
+        this.setState({
+          dinerReservations: newReservations
         });
       }
     });
@@ -59,11 +67,18 @@ export class ReservationsOverviewPage
     this._busReservationsRef.on('value', (busReservations) => {
       this.setState({...this.state, isLoadingBus: false, busReservations: []});
       if (busReservations) {
+        const newReservations: BusReservation[] = [];
         busReservations.forEach((busReservation) => {
-          this.setState({
-            busReservations: [...this.state.busReservations, busReservation.val()]
-          });
+          const busReservationWithKey = {
+            ...busReservation.val(),
+            key: busReservation.key,
+            path: busReservation.ref.path
+          };
+          newReservations.push(busReservationWithKey);
           return false;
+        });
+        this.setState({
+          busReservations: newReservations
         });
       }
     });
@@ -85,24 +100,18 @@ export class ReservationsOverviewPage
           reservations={dinerReservations}
           emptyListMessage={isLoadingDiner ? 'Aan het laden...' : 'Geen reservaties gevonden.'}
         />
-        <Link className="btn btn-primary" to={'/reservaties/diner/nieuw'}>Voeg diner reservatie toe</Link>
+        <Link className="btn btn-primary" to={'/reservaties/diner/nieuw'}>
+          <Glyphicon glyph="plus"/>{' '}Voeg diner reservatie toe
+        </Link>
 
         <h2>Bus</h2>
         <BusReservationList
           reservations={busReservations}
           emptyListMessage={isLoadingBus ? 'Aan het laden...' : 'Geen reservaties gevonden.'}
         />
-        <Link className="btn btn-primary" to={'/reservaties/bus/nieuw'}>Voeg bus reservatie toe</Link>
-
-        <h2>Betalen</h2>
-        <p>
-          Betalen kan via overschrijving op rekeningnummer <b>BE92 3770 1835 1023</b>.
-          Vermeld hierbij de namen van de ingeschrevenen, en de keuze van het hoofdgerecht.
-        </p>
-        <p>
-          <b>Opgelet!</b> Een reservatie is pas finaal als de betaling ontvangen is.
-          Reserveren kan tot <b>10 maart 2018</b>!
-        </p>
+        <Link className="btn btn-primary" to={'/reservaties/bus/nieuw'}>
+          <Glyphicon glyph="plus"/>{' '}Voeg bus reservatie toe
+        </Link>
       </div>
     );
   }

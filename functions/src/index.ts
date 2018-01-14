@@ -16,11 +16,11 @@ const mailTransport = nodemailer.createTransport({
 });
 
 // Sends an email confirmation when a user changes his mailing list subscription.
-export const sendEmailConfirmationForDiner = functions.database.ref('/reservations/diner').onCreate(event => {
+export const sendEmailConfirmationForDiner = functions.database.ref('/reservations/diner/{dinerKey}').onCreate(event => {
   const snapshot = event.data;
   const diner = snapshot.val() as DinerReservation;
 
-  console.log("New diner reservation (key: [" + snapshot.key + "]) found. Sending confirmation email.");
+  console.log("New diner reservation (key: [" + event.params.dinerKey + "]) found. Sending confirmation email.");
 
   const userUid = diner.createdBy;
   const userPromise = admin.auth().getUser(userUid);

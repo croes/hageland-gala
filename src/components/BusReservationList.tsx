@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BusReservation } from '../model';
 import * as Table from 'react-bootstrap/lib/Table';
+import { CancelReservationButton } from './CancelReservationButton';
 
 interface BusReservationListProps {
   reservations: BusReservation[];
@@ -14,7 +15,7 @@ export class BusReservationList extends React.Component<BusReservationListProps,
     if (reservations.length === 0) {
       return (
         <tr>
-          <td colSpan={5} style={{textAlign: 'center'}}><b>{this.props.emptyListMessage}</b></td>
+          <td colSpan={6} style={{textAlign: 'center'}}><b>{this.props.emptyListMessage}</b></td>
         </tr>
       );
     }
@@ -28,6 +29,9 @@ export class BusReservationList extends React.Component<BusReservationListProps,
           <td>{reservation.partyBus ? 'Ja' : 'Nee'}</td>
           <td>{reservation.nightBus ? 'Ja' : 'Nee'}</td>
           <td>{reservationDateString}</td>
+          <td>
+            <CancelReservationButton reservation={reservation}/>
+          </td>
         </tr>
       );
     });
@@ -44,6 +48,7 @@ export class BusReservationList extends React.Component<BusReservationListProps,
             <th>Bus naar avondfeest</th>
             <th>Nachtbus terug naar Leuven</th>
             <th>Datum reservatie</th>
+            <th>Acties</th>
           </tr>
           </thead>
           <tbody>

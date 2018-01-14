@@ -57,7 +57,7 @@ export class BusPage extends React.Component<{}, {}> {
             <td>03:45</td>
             <td>{gelabalLocatieLink}</td>
             <td>{leuvenLocatieLink}</td>
-            <td>05:00</td>
+            <td>04:30</td>
           </tr>
           </tbody>
         </Table>

@@ -8,10 +8,13 @@ export enum MenuChoice {
 export enum ReservationStatus {
   SUBMITTED = 'SUBMITTED',
   PAID = 'PAID',
+  CANCELLED = 'CANCELLED',
   DELETED = 'DELETED'
 }
 
 export interface Reservation {
+  key?: string;
+  path?: string;
   reserveeName: string;
   createdOn: number; // Date.now number
   createdBy: string; // firebase.User.uid

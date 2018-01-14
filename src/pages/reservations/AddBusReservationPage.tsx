@@ -29,7 +29,7 @@ export class AddBusReservationPage
         <div>
           <h1>Reservatie geplaatst!</h1>
           <p>
-            De reservatie is geplaatst. U kan deze later nog aanpassen.
+            De reservatie is geplaatst.
           </p>
           <Link to="/reservaties">Ga terug naar Mijn Reservaties</Link>
         </div>

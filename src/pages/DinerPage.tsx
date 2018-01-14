@@ -27,7 +27,7 @@ export class DinerPage extends React.Component<{}, {}> {
         </div>
 
         <div className="gala-prijs">
-          <b>€80,- per persoon</b>, inclusief drank (exclusief schuimwijnen) tot <b>04u00</b><br/>
+          <b>€80,- per persoon</b>, inclusief drank tot <b>04u00</b> (exclusief schuimwijnen)<br/>
           Actieve studenten genieten van een voordeeltarief van <b>€75,- per persoon</b><br/>
           Reserveren kan via de <Link to="/reservaties">Mijn reservaties</Link> pagina.
         </div>
