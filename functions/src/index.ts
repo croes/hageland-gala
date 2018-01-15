@@ -1,9 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
-import { DinerReservation, translateMenuChoice, ReservationStatus } from './model';
+import { BusReservation, DinerReservation, translateMenuChoice, ReservationStatus } from './model';
 import { BANK_ACCOUNT, DINER_PRICE, DINER_STUDENT_PRICE, END_OF_RESERVATION_DATE_STRING } from './constants';
-import { BusReservation } from '../../src/model';
 admin.initializeApp(functions.config().firebase);
 
 const gmailEmail = functions.config().gmail.email;
@@ -55,7 +54,7 @@ export const sendEmailConfirmationForDiner = functions.database.ref('/reservatio
 
 export const sendEmailConfirmationForDinerCancellation = functions.database.ref('/reservations/diner/{dinerKey}').onDelete(event => {
   const snapshot = event.data;
-  const diner = snapshot.val() as DinerReservation;
+  const diner = snapshot.previous.val() as DinerReservation;
 
   console.log('Diner reservation removed (key: [' + event.params.dinerKey + ']) found. Sending cancellation email.');
 
@@ -120,9 +119,9 @@ export const sendEmailConfirmationForBus = functions.database.ref('/reservations
   });
 });
 
-const sendEmailConfirmationForBusCancellation = functions.database.ref('/reservations/bus/{busKey}').onDelete(event => {
+export const sendEmailConfirmationForBusCancellation = functions.database.ref('/reservations/bus/{busKey}').onDelete(event => {
   const snapshot = event.data;
-  const busReservation = snapshot.val() as BusReservation;
+  const busReservation = snapshot.previous.val() as BusReservation;
 
   console.log('Deleted bus reservation (key: [' + event.params.busKey + ']) found. Sending cancellation email.');
 
@@ -156,7 +155,7 @@ const sendEmailConfirmationForBusCancellation = functions.database.ref('/reserva
   });
 });
 
-const sendEmailConfirmationForPaymentReceived = functions.database.ref('/rervations/diner/{dinerKey}').onUpdate(event => {
+export const sendEmailConfirmationForPaymentReceived = functions.database.ref('/reservations/diner/{dinerKey}').onUpdate(event => {
   const snapshot = event.data;
   const dinerBefore = snapshot.previous.val() as DinerReservation;
   const dinerAfter = snapshot.current.val() as DinerReservation;
