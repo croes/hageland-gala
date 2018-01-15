@@ -29,7 +29,8 @@ export class AddBusReservationPage
         <div>
           <h1>Reservatie geplaatst!</h1>
           <p>
-            De reservatie is geplaatst.
+            Bedankt! Je reservatie is genoteerd.
+            Een bevestigingsmail is verstuurd naar <b>{user.email}</b>.
           </p>
           <Link to="/reservaties">Ga terug naar Mijn Reservaties</Link>
         </div>

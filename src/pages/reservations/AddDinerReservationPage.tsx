@@ -31,7 +31,7 @@ export class AddDinerReservationPage
           <h1>Reservatie geplaatst</h1>
           <p>
             Bedankt! Je reservatie is genoteerd.
-            Een bevestiginsmail is verstuurd naar <b>{user.email}</b>.
+            Een bevestigingsmail is verstuurd naar <b>{user.email}</b>.
           </p>
 
           <h2>Betalen</h2>
