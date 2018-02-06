@@ -28,8 +28,10 @@ export class TOSPage extends React.Component<{}, {}> {
           Hageland Galabal te mogen claimen of te veronderstellen.</p>
 
         <p>Hageland Galabal streeft naar een zo actueel
-          mogelijke website. Mocht ondanks deze inspanningen de informatie van of de inhoud op <a
-            href="https://hagelandgala.be/" target="_blank">deze website</a> onvolledig en of onjuist zijn, dan
+          mogelijke website. Mocht ondanks deze inspanningen de informatie van of de inhoud op
+          <a href="https://hagelandgala.be/" target="_blank">
+            deze website
+          </a> onvolledig en of onjuist zijn, dan
           kunnen wij daarvoor geen aansprakelijkheid aanvaarden.</p>
 
         <p>De informatie en/of producten op deze website
