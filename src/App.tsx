@@ -11,6 +11,8 @@ import { AvondFeestPage } from './pages/AvondFeestPage';
 import { LocatiePage } from './pages/LocatiePage';
 import { BusPage } from './pages/BusPage';
 import { ReservationsPage } from './pages/reservations/ReservationsPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TOSPage } from './pages/TOSPage';
 
 class App extends React.Component<{}, {}> {
   render() {
@@ -27,6 +29,8 @@ class App extends React.Component<{}, {}> {
           <Route path="/registreer" component={RegisterPage}/>
           <Route path="/reservaties" component={ReservationsPage}/>
           <Route path="/login" component={LoginPage}/>
+          <Route path="/privacy" component={PrivacyPolicyPage}/>
+          <Route path="/tos" component={TOSPage}/>
           <Route component={NotFoundPage}/>
         </Switch>
       </div>
