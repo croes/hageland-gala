@@ -5,6 +5,17 @@ import { BusReservation, DinerReservation, translateMenuChoice, ReservationStatu
 import { BANK_ACCOUNT, DINER_PRICE, DINER_STUDENT_PRICE, END_OF_RESERVATION_DATE_STRING } from './constants';
 admin.initializeApp(functions.config().firebase);
 
+const ADMIN_USERS = [
+  'LEIO6UOcFdSx5S307gkFDWVGUgY2', //tinker
+  "B46RjV9y0qhoNBr7PHPq33QJn4M2", //volt email
+  'MMwRLbb9qsg6wliIPYUUfd1CwN12', //volt fb
+  'eprDhMCKf8Wf5i6A9rQC0EZbiK82' //jerom
+];
+
+ADMIN_USERS.forEach(adminUser => {
+  admin.auth().setCustomUserClaims(adminUser, {admin: true});
+});
+
 const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({

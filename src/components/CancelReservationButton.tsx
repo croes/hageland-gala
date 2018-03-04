@@ -61,7 +61,7 @@ export class CancelReservationButton
           onConfirm={this._handleConfirm}
           onCancel={this._handleCancel}
         >
-          Weet je zeker dat je de reservering wil annuleren?
+          Weet je zeker dat je de reservering voor <b>{reservation.reserveeName.toUpperCase()}</b> wil annuleren?
         </ConfirmationDialog>
       </div>
 

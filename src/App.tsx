@@ -13,6 +13,7 @@ import { BusPage } from './pages/BusPage';
 import { ReservationsPage } from './pages/reservations/ReservationsPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TOSPage } from './pages/TOSPage';
+import { AdminPage } from './pages/AdminPage';
 
 class App extends React.Component<{}, {}> {
   render() {
@@ -31,6 +32,7 @@ class App extends React.Component<{}, {}> {
           <Route path="/login" component={LoginPage}/>
           <Route path="/privacy" component={PrivacyPolicyPage}/>
           <Route path="/tos" component={TOSPage}/>
+          <Route path="/admin" component={AdminPage}/>
           <Route component={NotFoundPage}/>
         </Switch>
       </div>
